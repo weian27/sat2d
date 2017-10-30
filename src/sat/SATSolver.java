@@ -1,4 +1,4 @@
-package sat;
+ package sat;
 
 import immutable.ImList;
 import sat.env.Environment;
@@ -15,19 +15,19 @@ public class SATSolver {
      * unit propagation. The returned environment binds literals of class
      * bool.Variable rather than the special literals used in clausification of
      * class clausal.Literal, so that clients can more readily use it.
-     * 
+     *
      * @return an environment for which the problem evaluates to Bool.TRUE, or
      *         null if no such environment exists.
      */
     public static Environment solve(Formula formula) {
-        // TODO: implement this.
-        throw new RuntimeException("not yet implemented.");
+    		System.out.println(formula.getClauses().toString());
+    		return solve(formula.getClauses(), new Environment());
     }
 
     /**
      * Takes a partial assignment of variables to values, and recursively
      * searches for a complete satisfying assignment.
-     * 
+     *
      * @param clauses
      *            formula in conjunctive normal form
      * @param env
@@ -37,14 +37,17 @@ public class SATSolver {
      *         or null if no such environment exists.
      */
     private static Environment solve(ImList<Clause> clauses, Environment env) {
-        // TODO: implement this.
-        throw new RuntimeException("not yet implemented.");
+        // default return nulls
+    		//	If there are no clauses, the formula is trivially satisfiable.
+    		if (clauses == null) return env;
+        //•	If there is an empty clause, the clause list is unsatisfiable -- fail and backtrack. (use empty clause to denote a clause evaluated to FALSE based on the variable binding in the environment)
+    	  //weian doing
     }
 
     /**
      * given a clause list and literal, produce a new list resulting from
      * setting that literal to true
-     * 
+     *
      * @param clauses
      *            , a list of clauses
      * @param l
@@ -53,8 +56,7 @@ public class SATSolver {
      */
     private static ImList<Clause> substitute(ImList<Clause> clauses,
             Literal l) {
-        // TODO: implement this.
-        throw new RuntimeException("not yet implemented.");
+        return clauses.add(new Clause(l));
     }
 
 }
