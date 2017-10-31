@@ -1,7 +1,6 @@
 package sat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.io.*;
@@ -150,10 +149,13 @@ public class SATSolverTest {
 						throw new ClauseException("ClauseException: Errors in clause: " + process);
 					}
 				}
+				
+				// Close buffer and file
+	    		fileReader.close();
+	    		bufferedReader.close();
 			}
 				
-			// Close buffer
-			bufferedReader.close();
+			
 			
 			// Parse the Array List into Clauses
 			Clause clauseToAdd = new Clause();
@@ -220,7 +222,7 @@ public class SATSolverTest {
     	catch(ClauseException ex) {
     		System.out.println(ex.getMessage());
     	}
-    	    	
+   	   	
     	return null;
     }
     
