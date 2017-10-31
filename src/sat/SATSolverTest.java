@@ -91,6 +91,7 @@ public class SATSolverTest {
 			FileReader fileReader = new FileReader(filename);
 			
 			// Wrap the file reader in a BufferedReader
+			// Interestingly this is not registered as being closed
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			
 			while((line = bufferedReader.readLine()) != null) {
@@ -149,11 +150,12 @@ public class SATSolverTest {
 						throw new ClauseException("ClauseException: Errors in clause: " + process);
 					}
 				}
-				
-				// Close buffer and file
-	    		fileReader.close();
-	    		bufferedReader.close();
+							
 			}
+			
+			// Close buffer and file
+    		fileReader.close();
+    		bufferedReader.close();
 				
 			
 			
@@ -196,7 +198,6 @@ public class SATSolverTest {
 			if(variablesToAdd.size() != variableCount){
 				throw new ClauseException("ClauseException: The number of variables found does not equal the number of variables declared in header.");
 			}
-			
 			
 			return formula;
 			
