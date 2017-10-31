@@ -155,29 +155,27 @@ public class SATSolverTest {
 			// Close buffer
 			bufferedReader.close();
 			
-			System.out.println(Arrays.toString(list.toArray()));
-			
 			// Parse the Array List into Clauses
 			Clause clauseToAdd = new Clause();
-			
-			//HashSet<String> variablesToAdd = new HashSet<String>();
+			HashSet<String> variablesToAdd = new HashSet<String>();
 			
 			for(String item:list) {
-				// If reach the end of a line add the clause to a formula
-				System.out.println("adding clauses");
+				// If reach the end of a line "0" add the clause to a formula
+				// Restart new Clause();
 				if(item.equals("0")){
 					formula = formula.addClause(clauseToAdd);
+					clauseToAdd = new Clause();
 				} 
 				// Handle negative literals
-				else if(item.substring(0) == "-") {
+				else if(item.substring(0,1).equals("-")) {
 					// Add positive part of the string as a negative literal.
 					String itemProc = item.substring(1);
-					//variablesToAdd.add(itemProc);
+					variablesToAdd.add(itemProc);
 					clauseToAdd = clauseToAdd.add(NegLiteral.make(itemProc));
 				}
 				// Handle positive literals
 				else {
-					//variablesToAdd.add(item);
+					variablesToAdd.add(item);
 					clauseToAdd = clauseToAdd.add(PosLiteral.make(item));
 				}
 			}
@@ -189,14 +187,13 @@ public class SATSolverTest {
 			
 			
 			// Check if the number clauses are correct
-			if(formula.getSize() - 1 != clauseCount) {
+			if(formula.getSize() != clauseCount) {
 				throw new ClauseException("ClauseException: The number of clauses found does not equal the number of clauses declared in header.");
 			}
-			
-//			Ignore this temporarily
-//			if(variablesToAdd.size() != variableCount){
-//				throw new ClauseException("ClauseException: The number of variables found does not equal the number of variables declared in header.");
-//			}
+
+			if(variablesToAdd.size() != variableCount){
+				throw new ClauseException("ClauseException: The number of variables found does not equal the number of variables declared in header.");
+			}
 			
 			
 			return formula;
@@ -239,6 +236,9 @@ public class SATSolverTest {
 			Formula f = cnfReader(input);
 			
 			System.out.println(f);
+			
+			Environment e = SATSolver.solve(f);
+			System.out.println(e);
 			System.out.println("END");
 			
 			
