@@ -85,6 +85,7 @@ public class SATSolver {
 		if (smallestClause.size() == 1) {
 			return solve(newClauses, newEnv);
 		}
+
 		// If clause has more than one literals
 		// First try setting the literal to TRUE, substitute for it in all the clauses, then solve() recursively.
 		// If that fails, then try setting the literal to FALSE, substitute, and solve() recursively.
@@ -123,3 +124,4 @@ public class SATSolver {
     }
 
 }
+>>>>>>> 6ab6a11dd117592dcb7e1f45aea76380bc26b778
