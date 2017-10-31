@@ -1,5 +1,7 @@
 package sat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -11,6 +13,7 @@ import org.junit.Test;
 import sat.SATSolver;
 import sat.env.*;
 import sat.formula.*;
+
 import java.io.*;
 
 
@@ -66,8 +69,8 @@ public class SATSolverTest {
     
     public static void main(String args[]) {
     		String input = null;
-    		boolean isFile = false;
-    		
+    		ArrayList<String> list = new ArrayList();
+    		Clause clause = new Clause();
     		// To print out one line by one line
     		String line = null;
     		
@@ -83,8 +86,36 @@ public class SATSolverTest {
     			BufferedReader bufferedReader = new BufferedReader(fileReader);
     			
     			while((line = bufferedReader.readLine()) != null) {
-    				System.out.println(line);
+    				// Split the line by space
+    				String[] splitArr = line.split(" ");
+    				
+    				// ignore line starting with p
+    				if(splitArr[0].equals("p") || splitArr[0].equals("c")) {
+    					continue;
+    				} else {
+    					for(String item : splitArr) {
+    						list.add(item);
+    					}
+    				}
     			}
+    			
+    			// Always close files.
+            bufferedReader.close(); 
+            
+            // /Users/Caffae/eclipse-workspace/sat2d/sampleCNF/largeUnsat.cnf
+            for(String item : list) {
+            		if(item.equals("0")) {
+            			// end line
+            		} else {
+            			// check first char if "-"
+            			// if(item.substring(0, 1) = "-") {
+            				
+            			}
+            			Variable var = new Variable(item);
+            			
+            		}
+            }
+            	
     		}
     		
     		catch(FileNotFoundException ex) {
