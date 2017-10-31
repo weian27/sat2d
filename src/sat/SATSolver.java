@@ -121,7 +121,6 @@ public class SATSolver {
             Literal l) {
     	
     	return clauses.add(new Clause(l)); // add new clause which consists only of the literal l to the list of clauses given
-    }
-
+	}
 }
->>>>>>> 6ab6a11dd117592dcb7e1f45aea76380bc26b778
+
