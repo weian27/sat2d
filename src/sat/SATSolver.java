@@ -55,21 +55,21 @@ public class SATSolver {
     	}
     	// Otherwise, find smallest clause (by number of literals)
     	Iterator<Clause> clausesIterator = clauses.iterator();
-        Clause smallest = clausesIterator.next(); // to get the first clause in clauses ImList
+        Clause smallestClause = clausesIterator.next(); // to get the first clause in clauses ImList
     	for (Clause i : clauses) {
-    		if (i.size() < smallest.size()) {
-    			smallest = i;
+    		if (i.size() < smallestClause.size()) {
+    			smallestClause = i;
     		}
     	}
     	
-    	Literal literal1 = smallest.chooseLiteral(); // arbitrarily pick a literal from the smallest clause
+    	Literal literal1 = smallestClause.chooseLiteral(); // arbitrarily pick a literal from the smallest clause
 		ImList<Clause> newClauses;
 		Environment newEnv;
 		boolean makeTrue; // used to make literal true
 		
 		// To find literal that makes clause true
-		// Case 1: To make literal ~a true, check (~a == a) => wrong => if statement
-		// Case 2: To make literal a true, check (a == a) => correct => else statement
+		// if statement:   To make literal ~a true, check (~a == a) => wrong
+		// else statement: To make literal a true, check (a == a) => correct
 		if (literal1 == PosLiteral.make(literal1.getVariable() ) ){
 			newEnv = env.putTrue(literal1.getVariable());
 			newClauses = substitute(clauses, literal1);
@@ -82,7 +82,7 @@ public class SATSolver {
 		}
 		
 		// If the clause has only one literal, bind its variable in the environment so that the clause is satisfied
-		if (smallest.size() == 1) {
+		if (smallestClause.size() == 1) {
 			return solve(newClauses, newEnv);
 		}
 
