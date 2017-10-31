@@ -8,7 +8,6 @@ import sat.formula.Clause;
 import sat.formula.Formula;
 import sat.formula.Literal;
 import sat.formula.PosLiteral;
-import immutable.EmptyImList;
 
 /**
  * A simple DPLL SAT solver. See http://en.wikipedia.org/wiki/DPLL_algorithm
@@ -121,19 +120,7 @@ public class SATSolver {
     private static ImList<Clause> substitute(ImList<Clause> clauses,
             Literal l) {
     	
-    	ImList<Clause> newClauses = new EmptyImList<Clause>();
-    	
-        for (Clause i : clauses)	
-        	// Checked if first literal on clauses list is true
-        	// If true => clause i has at least one literal that is true => the clause is true => return null
-        	if (i.reduce(l) == null ){
-        		// return null
-        	}      
-        	// If not true => get the rest of the literals in clause i => return reduced version of Clause i
-        	else
-        		newClauses = newClauses.add(i.reduce(l));		
-        
-        return newClauses;
+    	return clauses.add(new Clause(l)); // add new clause which consists only of the literal l to the list of clauses given
     }
 
 }
