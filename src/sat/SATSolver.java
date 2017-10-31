@@ -67,9 +67,9 @@ public class SATSolver {
 		Environment newEnv;
 		boolean makeTrue; // used to make literal true
 		
-		// finds literal that makes clause true
-		// e.g. To make literal ~b true, check (~b == b) => wrong => if statement
-		// e.g. To make literal b true, check (b == b) => correct => else statement
+		// To find literal that makes clause true
+		// Case 1: To make literal ~a true, check (~a == a) => wrong => if statement
+		// Case 2: To make literal a true, check (a == a) => correct => else statement
 		if (literal1 == PosLiteral.make(literal1.getVariable() ) ){
 			newEnv = env.putTrue(literal1.getVariable());
 			newClauses = substitute(clauses, literal1);
