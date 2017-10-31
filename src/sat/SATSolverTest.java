@@ -1,13 +1,17 @@
 package sat;
 
+import java.util.Scanner;
+
 /*
 import static org.junit.Assert.*;
-
+s
 import org.junit.Test;
 */
 
+import sat.SATSolver;
 import sat.env.*;
 import sat.formula.*;
+import java.io.*;
 
 
 public class SATSolverTest {
@@ -39,8 +43,8 @@ public class SATSolverTest {
     public void testSATSolver2(){
     	// (~a)
     	Environment e = SATSolver.solve(makeFm(makeCl(na)));
-/*
-    	assertEquals( Bool.FALSE, e.get(na.getVariable()));
+/* 
+    	assertEquals( Bool.FALSE, e.get(na.getVaria ble()));
 */    	
     }
     
@@ -60,6 +64,37 @@ public class SATSolverTest {
         return c;
     }
     
+    public static void main(String args[]) {
+    		String input = null;
+    		boolean isFile = false;
+    		
+    		// To print out one line by one line
+    		String line = null;
+    		
+    		System.out.print("Input Filepath: ");
+			Scanner s = new Scanner(System.in);
+			input = s.nextLine();
+			
+    		try {
+    			// Read file in the default encoding
+    			FileReader fileReader = new FileReader(input);
+    			
+    			// Wrap the file reader in a BufferedReader
+    			BufferedReader bufferedReader = new BufferedReader(fileReader);
+    			
+    			while((line = bufferedReader.readLine()) != null) {
+    				System.out.println(line);
+    			}
+    		}
+    		
+    		catch(FileNotFoundException ex) {
+    			System.out.println("Unable to open file '" + input + "'");
+    		}
+    		
+    		catch(IOException ex) {
+    			System.out.println("IOException while reading file '" + input + "'");
+    		}
+    }
     
     
 }
